@@ -4,11 +4,14 @@
 
 {% block content %}
     <div class="container">
-        <h2>Create Hall of Fame</h2>
+        <h2>Edit Hall of Fame</h2>
         <form method="POST">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </form>
+
+        <a href="{% url 'delete_hall' hall.id %}" class="btn btn-danger">Delete this Hall of Fame</a>
+
     </div>
 {% endblock %}

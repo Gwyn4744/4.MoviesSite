@@ -39,7 +39,7 @@ class CreateHall(generic.CreateView):
     model = Hall
     fields = ['title']
     template_name = 'movies/create_hall.html'
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('dashboard')
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -49,3 +49,14 @@ class CreateHall(generic.CreateView):
 class DetailHall(generic.DetailView):
     model = Hall
     template_name = 'movies/detail_hall.html'
+
+class UpdateHall(generic.UpdateView):
+    model = Hall
+    template_name = 'movies/update_hall.html'
+    fields = ['title']
+    success_url = reverse_lazy('dashboard')
+
+class DeleteHall(generic.DeleteView):
+    model = Hall
+    template_name = 'movies/delete_hall.html'
+    success_url = reverse_lazy('dashboard')
