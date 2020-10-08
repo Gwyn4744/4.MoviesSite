@@ -26,4 +26,7 @@ urlpatterns = [
     path('signup/', views.SignUpView.as_view(), name='signupview'),
     path('login/', auth_views.LoginView.as_view(), name='loginview'),
     path('logout/', auth_views.LogoutView.as_view(), name='logoutview'),
+
+    # Hall
+    path('halloffame/create', views.CreateHall.as_view(), name='crate_hall'),
 ]
