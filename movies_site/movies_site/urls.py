@@ -21,6 +21,7 @@ from movies import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('dashboard/', views.dashboard, name='dashboard'),
 
     # Auth
     path('signup/', views.SignUpView.as_view(), name='signupview'),
@@ -28,5 +29,8 @@ urlpatterns = [
     path('logout/', auth_views.LogoutView.as_view(), name='logoutview'),
 
     # Hall
-    path('halloffame/create', views.CreateHall.as_view(), name='crate_hall'),
+    path('halloffame/create/', views.CreateHall.as_view(), name='crate_hall'),
+    path('halloffame/<int:pk>/', views.DetailHall.as_view(), name='detail_hall'),
+    # path('halloffame/<int:pk>/update/', views.UpdateHall.as_view(), name='update_hall'),
+    # path('halloffame/<int:pk>/delete/', views.DeleteHall.as_view(), name='delete_hall'),
 ]

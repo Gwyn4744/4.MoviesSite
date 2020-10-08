@@ -10,6 +10,9 @@ from django.contrib.auth import authenticate, login
 def home(request):
     return render(request, 'movies/home.html')
 
+def dashboard(request):
+    return render(request, 'movies/dashboard.html')
+
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('home')
@@ -42,3 +45,7 @@ class CreateHall(generic.CreateView):
         form.instance.user = self.request.user
         super(CreateHall, self).form_valid(form)
         return redirect('home')
+
+class DetailHall(generic.DetailView):
+    model = Hall
+    template_name = 'movies/detail_hall.html'

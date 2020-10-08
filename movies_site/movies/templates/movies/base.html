@@ -17,6 +17,7 @@
     <nav>
         {% if user.is_authenticated %}
       <a href="{% url 'logoutview' %}">Logout</a>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
         {% else %}
       <a href="{% url 'signupview' %}">Sign Up</a>
       <a href="{% url 'loginview' %}">Login</a>
