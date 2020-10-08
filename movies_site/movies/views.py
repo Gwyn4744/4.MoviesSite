@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
 from .models import Hall
+from django.contrib.auth import authenticate, login
 
 # Create your views here.
 
@@ -13,6 +14,13 @@ class SignUpView(generic.CreateView):
     form_class = UserCreationForm
     success_url = reverse_lazy('home')
     template_name = 'registration/signupview.html'
+
+    def form_valid(self, form):
+        view = super(SignUpView, self).form_valid(form)
+        username, password = form.cleaned_data.get('username'), form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=password)
+        login(self.request, user)
+        return view
 
 # def crate_hall(request):
 #     if request.method == 'POST':
