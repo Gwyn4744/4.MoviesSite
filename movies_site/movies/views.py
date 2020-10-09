@@ -5,7 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import Hall, Video
 from django.contrib.auth import authenticate, login
 from .forms import VideoForm, SearchForm
-from  django.http import Http404
+from  django.http import Http404, JsonResponse
 import urllib
 import requests
 from django.forms.utils import ErrorList
@@ -52,6 +52,12 @@ def add_video(request, pk):
         'hall': hall,
     }
     return render(request, 'movies/add_video.html', context)
+
+def video_search(request):
+    search_form = SearchForm(request.GET)
+    if search_form.is_valid():
+        return JsonResponse({'Hello': search_form.cleaned_data['search_tern']})
+    return JsonResponse({'Hello': 'Not working'})
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm

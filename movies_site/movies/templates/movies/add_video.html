@@ -37,6 +37,19 @@
             $('#id_search_tern').keyup(function() {
                 clearTimeout(delayTimer);
                 $('#search_results').text('Loading...');
+                deleyTimer = setTimeout(function() {
+                    var text = $('#id_search_tern').val();
+                    $.ajax({
+                        url: '/video/search/',
+                        data: {
+                            'search_tern': text
+                        },
+                        dataType: 'json',
+                        success: function(data) {
+                            $('#search_results').text(data['Hello']);
+                        },
+                    });
+                }, 2000);
             });
         </script>
     </div>
