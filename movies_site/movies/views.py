@@ -56,8 +56,10 @@ def add_video(request, pk):
 def video_search(request):
     search_form = SearchForm(request.GET)
     if search_form.is_valid():
-        return JsonResponse({'Hello': search_form.cleaned_data['search_tern']})
-    return JsonResponse({'Hello': 'Not working'})
+        encoded_search_tern = urllib.parse.quote(search_form.cleaned_data['search_tern'])
+        response = requests.get(f'https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q={ encoded_search_tern }&key={YOUTUBE_API_KEY}')
+        return JsonResponse(response.json())
+    return JsonResponse({'Hello': 'Not able to validate form'})
 
 class SignUpView(generic.CreateView):
     form_class = UserCreationForm
