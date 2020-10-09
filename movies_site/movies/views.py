@@ -18,7 +18,8 @@ def home(request):
     return render(request, 'movies/home.html')
 
 def dashboard(request):
-    return render(request, 'movies/dashboard.html')
+    halls = Hall.objects.filter(user=request.user)
+    return render(request, 'movies/dashboard.html', {'halls':halls})
 
 def add_video(request, pk):
     form = VideoForm()
