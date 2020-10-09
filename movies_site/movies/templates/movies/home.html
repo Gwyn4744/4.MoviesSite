@@ -4,7 +4,42 @@
 
 {% block content %}
 
-    <h2>HOME SWEET HOME</h2>
-    <img src="{% static 'movies/logo.png' %}">
+    <section class="jumbotron text-center">
+        <div class="container">
+            <img src="{% static 'movies/logo.png' %}" height="100px">
+            <h1 class="jumbotron-heading">What's your personal Hall of Fame?</h1>
+            <p class="lead text-muted">
+                COŚ TAM COŚ TAM COŚ TAM ŻÓŁĆŹĘĄ
+            </p>
+            <p>
+                <a href="{% url 'crate_hall' %}" class="btn btn-primary">Create Your HOF</a>
+            </p>
+            <div class="container">
+                <h1 class="text-center">Last added</h1>
+                {% for hall in recent_halls %}
+
+                    <h3><a href="{% url 'detail_hall' hall.id %}">{{ hall.title }}</a></h3>
+                    <a href="{% url 'delete_hall' hall.id %}" class="btn btn-danger">Delete</a>
+                    <a href="{% url 'update_hall' hall.id %}" class="btn btn-primary">Edit</a>
+                    <a href="{% url 'add_video' hall.id %}" class="btn btn-primary">Add Video</a>
+
+                    <div class="row">
+                        {% for video in hall.video_set.all %}
+                            <div class="col-md-4 mt-3">
+                                <div class="card mb-4 shadow-sm">
+                                    <iframe width="100%" height="225" src="https://www.youtube.com/embed/{{ video.youtube_id }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <div class="card-body">
+                                        <p class="card-text">{{ video.title }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
 
 {% endblock %}

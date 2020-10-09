@@ -15,7 +15,8 @@ YOUTUBE_API_KEY = 'AIzaSyAKsVcz9Qa1S2Qd-_LKFuiduKdIGUowb7A'
 # Create your views here.
 
 def home(request):
-    return render(request, 'movies/home.html')
+    recent_halls = Hall.objects.all().order_by('-id')[:3]
+    return render(request, 'movies/home.html', {'recent_halls':recent_halls})
 
 def dashboard(request):
     halls = Hall.objects.filter(user=request.user)
